@@ -72,10 +72,11 @@
         transform: translateY(-3px);
         background-color: #bdc3c7;
       }
-    }
-  
-    .card:nth-child(odd) {
-      color: #e74c3c; /* Red for Hearts and Diamonds */
+
+      &.flipped-down {
+        background-color: wheat;
+        border: 1px solid #2c3e50;
+      }
     }
   }
   
