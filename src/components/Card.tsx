@@ -1,19 +1,21 @@
 import React from 'react';
 
 interface CardProps {
-    // Define the props for the Card component here
     value: string
     isFlippedDown?: boolean
 }
 
 const Card: React.FC<CardProps> = ({value, isFlippedDown}: CardProps) => {
-    // Implement the Card component logic here
     const type = getTypeView(value[0])
     const number = getNumberView(value.substring(1))
     const isRed = value.startsWith("K") || value.startsWith("C")
 
     if (isFlippedDown){
         return <div className="card flipped-down">🌵</div>
+    }
+
+    if (value === ""){
+        return <></>
     }
 
     return (
@@ -25,7 +27,6 @@ function getNumberView(number: string): string{
     switch(number){
         case "1":
             return "A"
-
         case "11":
             return "J"
         case "12":

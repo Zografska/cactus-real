@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import PokerTable from './components/Table';
+import CactusTable from './components/Table';
 
 function App() {
   const [game, setGame] = useState<Game | null>(null);
@@ -27,7 +27,7 @@ function App() {
     <div className="App">
       <header className="App-header">
 
-      <PokerTable {... tableProps}/>
+      <CactusTable {... tableProps}/>
 
       <p>The current time is {id}.</p>
       </header>
