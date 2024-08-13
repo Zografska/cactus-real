@@ -22,5 +22,5 @@ def create_game():
     [player1, deck] = pick_from_deck(deck, 4)
     [player2, deck] = pick_from_deck(deck, 4)
 
-    return {"id": 1, "player1": player1, "player2": player2}
+    return {"id": 1, "player1": player1, "player2": player2, "throwPile": ["K2","K3"]}
 

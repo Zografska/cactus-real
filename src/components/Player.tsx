@@ -10,10 +10,10 @@ type PlayerProps = {
 const Player: React.FC<PlayerProps> = ({ name, cards, seatPosition }) => {
     return (
         <div className={`seat ${seatPosition}-seat`}>
-          {name}
+          <div className='player-name'>{name}</div>
           <div className="cards">
-            {cards.map(card =>
-                    <Card value={card}/>
+            {cards.map((card, i) =>
+              <Card key={i} value={card}/>
             )}
           </div>
         </div>
