@@ -68,15 +68,17 @@
   transition: transform 0.2s ease, background-color 0.3s ease;
   z-index: 2; /* Ensure cards appear above the player's name */
 
-  &:hover {
-    transform: translateY(-3px);
-    background-color: #bdc3c7;
-  }
-
   &.flipped-down {
     background-color: wheat;
     border: 1px solid #2c3e50;
   }
+}
+
+.can-play {
+  &:hover {
+    transform: translateY(-3px);
+    background-color: #bdc3c7;
+  }  
 }
 
 .top-seat {

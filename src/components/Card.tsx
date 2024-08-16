@@ -2,16 +2,17 @@ import React from 'react';
 
 interface CardProps {
     value: string
+    canPlay: boolean
     isFlippedDown?: boolean
 }
 
-const Card: React.FC<CardProps> = ({value, isFlippedDown}: CardProps) => {
+const Card: React.FC<CardProps> = ({value, canPlay, isFlippedDown}: CardProps) => {
     const type = getTypeView(value[0])
     const number = getNumberView(value.substring(1))
     const isRed = value.startsWith("K") || value.startsWith("C")
 
     if (isFlippedDown){
-        return <div className="card flipped-down">🌵</div>
+        return <div className={`card ${canPlay? "can-play" : ""} flipped-down`} >🌵</div>
     }
 
     if (value === ""){
@@ -19,7 +20,10 @@ const Card: React.FC<CardProps> = ({value, isFlippedDown}: CardProps) => {
     }
 
     return (
-        <div className="card" style={{color: isRed ? "red" : "black"}}>{number}{type}</div>
+        <div 
+        className={`card ${canPlay? "can-play" : ""}`} 
+        style={{color: isRed ? "red" : "black"}}
+        >{number}{type}</div>
     );
 };
 

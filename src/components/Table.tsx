@@ -4,17 +4,21 @@ import Player from './Player';
 import Card from './Card';
 
 
-interface Game {
+export interface Game {
   id: number
   deck: string[]
   player1: string[]
   player2: string[]
   throwPile: string[]
-  turn: "p1" | "p2"
+  turn: Turn
 }
 
-const GameContext = createContext<Game>({} as Game);
+export interface Turn {
+  player: "p1" | "p2", 
+  action: "start" | "throw" | "swap" | "peek"
+}
 
+export const GameContext = createContext<Game>({} as Game);
 
 const CactusTable: React.FC = () => {
   const [game, setGame] = useState<Game | null>(null);
@@ -41,8 +45,8 @@ const CactusTable: React.FC = () => {
       <div className="cactus-table">
         <div className="table-center">
           <div className='cards'>
-          <Card value={game.throwPile.length > 0 ? game.throwPile[game.throwPile.length-1]: ""}/>
-          <Card value='deck' isFlippedDown={true}/>
+          <Card value={game.throwPile.length > 0 ? game.throwPile[game.throwPile.length-1]: ""} canPlay={true}/>
+          <Card value='deck' isFlippedDown={true} canPlay={true}/>
           </div>
         </div>
         <div className="seats">

@@ -7,6 +7,9 @@ def pick_from_deck(deck, n=1):
         return [deck[0], deck[1:]]
     return [deck[:n], deck[n:]]
 
+
+# actions: start, throw, swap, peek
+
 app = Flask(__name__)
 
 @app.route('/game')
@@ -22,5 +25,5 @@ def create_game():
     [player1, deck] = pick_from_deck(deck, 4)
     [player2, deck] = pick_from_deck(deck, 4)
 
-    return {"id": 1, "player1": player1, "player2": player2, "throwPile": ["K2","K3"]}
+    return {"id": 1, "player1": player1, "player2": player2, "throwPile": ["K2","K3"], "turn": {"player": "p1", "action": "start"}}
 
