@@ -7,14 +7,13 @@ interface CardProps {
     isFlippedDown?: boolean
 }
 
-const Card: React.FC<CardProps> = ({value, canPlay, isFlippedDown}: CardProps) => {
+const Card: React.FC<CardProps> = ({value, canPlay, isFlippedDown, onCardClicked}: CardProps) => {
     const type = getTypeView(value[0])
     const number = getNumberView(value.substring(1))
     const isRed = value.startsWith("K") || value.startsWith("C")
 
-    if (isFlippedDown){
-        return <div className={`card ${canPlay? "can-play" : ""} flipped-down`} >🌵</div>
-    }
+    const displayedValue = isFlippedDown? "🌵" : `${number}${type}`
+    const extraClasses = `${canPlay? "can-play" : ""} ${isFlippedDown? "flipped-down" : ""}`
 
     if (value === ""){
         return <></>
@@ -22,9 +21,12 @@ const Card: React.FC<CardProps> = ({value, canPlay, isFlippedDown}: CardProps) =
 
     return (
         <div 
-        className={`card ${canPlay? "can-play" : ""}`} 
+        className={`card ${extraClasses}`} 
         style={{color: isRed ? "red" : "black"}}
-        >{number}{type}</div>
+        onClick={() => {
+            onCardClicked?.()
+        }}
+        >{displayedValue}</div>
     );
 };
 

@@ -9,8 +9,10 @@ type PlayerProps = {
 };
 
 const Player: React.FC<PlayerProps> = ({ name, cards, seatPosition }) => {
-    const {turn} = useContext(GameContext)
+    const {turn, valueInHand} = useContext(GameContext)
     const canPlay = turn.player === name
+    const showDrawnCard = canPlay && !!valueInHand
+    debugger
     return (
         <div className={`seat ${seatPosition}-seat`}>
           <div className='player-name'>{name}</div>
@@ -18,7 +20,10 @@ const Player: React.FC<PlayerProps> = ({ name, cards, seatPosition }) => {
             {cards.map((card, i) =>
               <Card key={i} value={card} canPlay={canPlay}/>
             )}
+
+            {showDrawnCard ? <Card value={valueInHand} canPlay={canPlay}/> :<></> }
           </div>
+          
         </div>
     );
 };

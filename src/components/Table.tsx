@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useState } from 'react';
 import './Table.scss';
 import Player from './Player';
 import Card from './Card';
-import { startNewGame } from './api';
+import { drawFromDeck, startNewGame,  } from './api';
 import { Game } from './types';
 
 
@@ -34,8 +34,11 @@ const CactusTable: React.FC = () => {
         <div className="table-center">
           <div className='cards'>
           <Card value={game.throwPile.length > 0 ? game.throwPile[game.throwPile.length-1]: ""} canPlay={true}/>
+        
           <Card value='deck' isFlippedDown={true} canPlay={true} onCardClicked={async () => {
-              console.log("deck clicked")
+            const hand = await drawFromDeck()
+            debugger
+            setGame({...game, turn: hand.turn, valueInHand: hand.card})
           }}/>
           </div>
         </div>

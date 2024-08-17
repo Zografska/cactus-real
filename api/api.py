@@ -1,39 +1,23 @@
 import time
-import random
 import json
-import serializer
 from flask import Flask
 from models import Game, Turn
-
-def pick_from_deck(deck, n=1):
-    if n == 1:
-        return [deck[0], deck[1:]]
-    return [deck[:n], deck[n:]]
 
 
 # actions: start, throw, swap, peek
 
 app = Flask(__name__)
 
+game = None
+
 @app.route('/game')
 def create_game():
-    card_values = [str(x + 1) for x in range(13)]
-    card_types = ['T', 'K', 'C', 'P']
-    deck = ["{0}{1}".format(color, value) for color in card_types for value in card_values]
-
-    random.shuffle(deck)
-    # print(deck)
-    # new game
-
-    [player1, deck] = pick_from_deck(deck, 4)
-    [player2, deck] = pick_from_deck(deck, 4)
-    game = Game(player1, player2, deck, [])
-    print(game.player1)
+    global game
+    game = Game()
     return game.toJSON()
 
-# @app.route('/draw')
-# def create_game():
-    
-    
-#     return {"id": 1, "player1": player1, "player2": player2, "throwPile": ["K2","K3"], "turn": {"player": "p1", "action": "start"}}
+@app.route('/game/draw')
+def draw_from_deck():
+    global game
+    return game.pick_from_deck().toJSON()
 
