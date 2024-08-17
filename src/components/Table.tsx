@@ -2,21 +2,9 @@ import React, { createContext, useEffect, useState } from 'react';
 import './Table.scss';
 import Player from './Player';
 import Card from './Card';
+import { startNewGame } from './api';
+import { Game } from './types';
 
-
-export interface Game {
-  id: number
-  deck: string[]
-  player1: string[]
-  player2: string[]
-  throwPile: string[]
-  turn: Turn
-}
-
-export interface Turn {
-  player: "p1" | "p2", 
-  action: "start" | "throw" | "swap" | "peek"
-}
 
 export const GameContext = createContext<Game>({} as Game);
 
@@ -24,7 +12,7 @@ const CactusTable: React.FC = () => {
   const [game, setGame] = useState<Game | null>(null);
 
   useEffect(() => {
-    fetch('/game').then(res => res.json()).then(data=> {
+    startNewGame().then(data=> {
       setGame(data);
     });
   }, []);
@@ -46,7 +34,9 @@ const CactusTable: React.FC = () => {
         <div className="table-center">
           <div className='cards'>
           <Card value={game.throwPile.length > 0 ? game.throwPile[game.throwPile.length-1]: ""} canPlay={true}/>
-          <Card value='deck' isFlippedDown={true} canPlay={true}/>
+          <Card value='deck' isFlippedDown={true} canPlay={true} onCardClicked={async () => {
+              console.log("deck clicked")
+          }}/>
           </div>
         </div>
         <div className="seats">

@@ -3,6 +3,7 @@ import React from 'react';
 interface CardProps {
     value: string
     canPlay: boolean
+    onCardClicked?: () => Promise<void>
     isFlippedDown?: boolean
 }
 

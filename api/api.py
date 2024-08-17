@@ -1,6 +1,9 @@
 import time
 import random
+import json
+import serializer
 from flask import Flask
+from models import Game, Turn
 
 def pick_from_deck(deck, n=1):
     if n == 1:
@@ -24,6 +27,13 @@ def create_game():
 
     [player1, deck] = pick_from_deck(deck, 4)
     [player2, deck] = pick_from_deck(deck, 4)
+    game = Game(player1, player2, deck, [])
+    print(game.player1)
+    return game.toJSON()
 
-    return {"id": 1, "player1": player1, "player2": player2, "throwPile": ["K2","K3"], "turn": {"player": "p1", "action": "start"}}
+# @app.route('/draw')
+# def create_game():
+    
+    
+#     return {"id": 1, "player1": player1, "player2": player2, "throwPile": ["K2","K3"], "turn": {"player": "p1", "action": "start"}}
 
