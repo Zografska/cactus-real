@@ -1,6 +1,6 @@
 from serializer import Object
 import random
-from game_logic import pick_from_deck
+from game_logic import pick_from_deck, put_card_on_throw_pile
 class Turn(Object):
   def __init__(self, player="p1", action="start"):
     self.player = player
@@ -32,5 +32,27 @@ class Game(Object):
     def pick_from_deck(self):
         [card, deck] = pick_from_deck(self.deck)
         self.deck = deck
-        self.turn = Turn(self.turn.player, "swap")
+        current_turn = self.turn.player
+        self.turn = Turn(current_turn, "swap")
+
+        if(current_turn == 'p1'):
+            self.player1.append(card)
+        else: 
+            self.player2.append(card)
+                        
         return Hand(card,self.turn)
+    
+    def throw_card(self, index: int):
+        cards = self.player1 if self.turn.player == "p1" else self.player2
+        [throwPile, cards] = put_card_on_throw_pile(self.throwPile, cards, index)
+        if (self.turn.player == "p1"):
+            self.player1 = cards
+            self.turn = Turn("p2", "start")
+        else:
+            self.player2 = cards
+            self.turn = Turn("p1", "start")
+        
+
+
+        
+    

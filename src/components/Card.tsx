@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { GameContext } from './context';
 
 interface CardProps {
     value: string
@@ -23,8 +24,11 @@ const Card: React.FC<CardProps> = ({value, canPlay, isFlippedDown, onCardClicked
         <div 
         className={`card ${extraClasses}`} 
         style={{color: isRed ? "red" : "black"}}
+        aria-disabled={!canPlay}
         onClick={() => {
-            onCardClicked?.()
+            if(canPlay){
+                onCardClicked?.()
+            }
         }}
         >{displayedValue}</div>
     );

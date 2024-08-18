@@ -21,3 +21,9 @@ def draw_from_deck():
     global game
     return game.pick_from_deck().toJSON()
 
+@app.route('/game/throw/<int:index>', methods=['POST'])
+def throw_card(index: int):
+    global game
+    game.throw_card(index)
+    return game.toJSON()
+

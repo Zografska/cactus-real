@@ -1,12 +1,10 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Table.scss';
 import Player from './Player';
 import Card from './Card';
-import { drawFromDeck, startNewGame,  } from './api';
+import { drawFromDeck, startNewGame, throwCard } from './api';
 import { Game } from './types';
-
-
-export const GameContext = createContext<Game>({} as Game);
+import { GameContext } from './context';
 
 const CactusTable: React.FC = () => {
   const [game, setGame] = useState<Game | null>(null);
@@ -28,8 +26,13 @@ const CactusTable: React.FC = () => {
     );
   }
 
+  const onCardClicked = async (index: number) => {
+    const newGameState = await throwCard(index)
+    setGame(newGameState)
+  }
+
   return (
-    <GameContext.Provider value={game}>
+    <GameContext.Provider value={{...game, onCardClicked}}>
       <div className="cactus-table">
         <div className="table-center">
           <div className='cards'>
@@ -37,7 +40,6 @@ const CactusTable: React.FC = () => {
         
           <Card value='deck' isFlippedDown={true} canPlay={true} onCardClicked={async () => {
             const hand = await drawFromDeck()
-            debugger
             setGame({...game, turn: hand.turn, valueInHand: hand.card})
           }}/>
           </div>

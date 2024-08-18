@@ -12,3 +12,8 @@ export const drawFromDeck = async (): Promise<Hand> => {
     const res = await fetch('/game/draw')
   return await res.json()
 }
+
+export const throwCard = async (index: number): Promise<Game> => {
+  const res = await fetch(`/game/throw/${index}`, postOptions)
+  return await res.json()
+}

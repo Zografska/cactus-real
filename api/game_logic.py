@@ -39,3 +39,13 @@ def put_card_on_throw_pile(deck: [], throw_pile: [], cards, card_index: int):
         cards[card_index] = picked_up
     
     return [deck, throw_pile, cards, success]
+
+
+def put_card_on_throw_pile(throw_pile: [], cards, card_index: int):
+    card = cards[card_index]
+    card_number = int(card[1:])
+
+    throw_pile.append(card)
+    cards.pop(card_index)
+    
+    return [throw_pile, cards]
