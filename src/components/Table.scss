@@ -77,7 +77,9 @@
 .can-play {
   &:hover {
     transform: translateY(-3px);
-    background-color: #bdc3c7;
+    background-color: #e0f0fa;
+    border-color: #d9ee7de6;
+    box-shadow: 0 0 10px #d9ee7de6;
   }  
 }
 
