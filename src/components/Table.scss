@@ -62,22 +62,18 @@
   align-items: center;
   justify-content: center;
   font-size: small;
-  font-weight: bold;
-  color: #2c3e50;
   border: 1px solid #bdc3c7;
   transition: transform 0.2s ease, background-color 0.3s ease;
   z-index: 2; /* Ensure cards appear above the player's name */
-
   &.flipped-down {
-    background-color: wheat;
-    border: 1px solid #2c3e50;
+    background-color: #f3e4c9;
   }
 }
 
 .can-play {
   &:hover {
     transform: translateY(-3px);
-    background-color: #e0f0fa;
+    background-color: #e3edb8;
     border-color: #d9ee7de6;
     box-shadow: 0 0 10px #d9ee7de6;
   }  
